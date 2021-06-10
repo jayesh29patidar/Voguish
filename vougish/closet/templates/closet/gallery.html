@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <style>
+        .image-thumbnail{
+            height: 250px;
+            object-fit: cover;
+        }
+    </style>
+
+</head>
+
+<body class="m-5">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!--------------------------------- Nav  code with bootstrap--------------->
+
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        Categories
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="{% url 'gallery' %}">All</a> 
+                        </li>
+                        {% for category in categories %}
+                        <li class="list-group-item ">
+                            <a href="{% url 'gallery' %}?category={{category.name}}">
+                                 {{category.name}} 
+
+                            </a>
+                        </li>
+
+                        {% endfor %}
+                        
+
+                        <!-- <li class="list-group-item">Vestibulum at eros</li> -->
+
+                        
+                        <a href="{% url 'add' %}"  class="btn btn-dark btn-block btn-sm m-1"  >Add Photo</a>
+                        
+                    </ul>
+                </div>
+
+                <!--------------------------------- Nav  code with bootstrap--------------->
+            </div>
+            <div class="col-md-9">
+                <!-- For Gallery -->
+                <div class="row">
+                    <!-- ----------------------------------------- -->
+
+                    {% for photo in closet %}
+
+                    <div class="col-md-4">
+                        <div class="card" >
+                            <img class="image-thumbnail" src="{{photo.image.url}}"
+                             alt = "Card image cap">
+<!-- ???????????????????????????????????????????????????? yaha pr dikkat aai h 58:06 ??????????????????????????????? -->
+                            <div class="card-body">
+                              <small>Catagory:{{photo.category.name}}</small>
+                            </div>
+                            <a href="{% url 'photo' photo.id %}" class='btn btn-outline-dark btn-sm m-1'>View</a>
+                          </div>
+                    </div>
+<!-- ?????????????????????????????????????????????????????????????????????????????????????                     -->
+                    {% empty %}
+                    <h3>No photos...</h3>
+                    {% endfor %}
+                    
+
+
+
+
+                    <!-- <div class="col-md-4">
+                        <div class="card" >
+                            <img class="image-thumbnail" src="https://i.pinimg.com/236x/6c/cb/2d/6ccb2dfb85479dec1c8da12560a36eb5.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <small>Catagory: Clothing items</small>
+                            </div>
+                            <a href="{% url 'photo' 5 %}" class='btn btn-outline-dark btn-sm m-1'>View</a>
+                          </div>
+                    </div>
+
+
+
+                    <div class="col-md-4">
+                        <div class="card" >
+                            <img class="image-thumbnail" src="https://i.pinimg.com/236x/85/eb/31/85eb319cf46b1405152318422eb4b640.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <small>Catagory: Clothing items</small>
+                            </div>
+                            <a href="{% url 'photo' 5 %}" class='btn btn-outline-dark btn-sm m-1'>View</a>
+                          </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="card" >
+                            <img class="image-thumbnail" src="https://i.pinimg.com/236x/6f/4c/dd/6f4cddcd4b2bae31315fb0ecc6a5c5a4.jpg" alt="Card image cap">
+                            <div class="card-body">
+                              <small>Catagory: Clothing items</small>
+                            </div>
+                            <a href="{% url 'photo' 5 %}" class='btn btn-outline-dark btn-sm m-1'>View</a>
+                          </div>
+                    </div> -->
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
